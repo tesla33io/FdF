@@ -6,18 +6,22 @@
 #    By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 17:41:42 by astavrop          #+#    #+#              #
-#    Updated: 2024/02/08 21:43:31 by astavrop         ###   ########.fr        #
+#    Updated: 2024/02/10 17:48:40 by astavrop         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC					= cc
 CFLAGS				= -Wall -Werror -Wextra -g
-LIBS				= -L$(FT_PINTF_PATH) -L$(LFT_PATH) -lftprintf -lft -L$(MLX_PATH) -lmlx -L/usr/lib/X11 -lXext -lX11
-INCLUDES			= -I/usr/include -Imlx_linux
+LIBS				+= -L$(FT_PINTF_PATH) -L$(LFT_PATH) -lftprintf -lft
+LIBS				+= -L$(MLX_PATH) -lmlx -L/usr/lib/X11 -lXext -lX11
+LIBS				+= -lm
+INCLUDES			= -I/usr/include -Imlx_linux -Ift_printf -Ilibft -I.
 NAME				= fdf
 
 SRCS				+= fdf.c
 SRCS				+= hooks.c
+SRCS				+= draw.c
+SRCS				+= utils.c
 OBJS				= $(SRCS:.c=.o)
 
 FT_PINTF_PATH		= ./ft_printf/
