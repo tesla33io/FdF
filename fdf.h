@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 20:54:16 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/11 21:08:54 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/11 21:37:33 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,14 @@
 
 # define SCRN_X 960
 # define SCRN_Y 540
-# define W_NAME "._."
+# define W_NAME ".  _  ."
 # define Z 75
 # define W 250
 # define H 250
 # define SPX -100
 # define SPY 500
+# define ROWS 10
+# define COLS 10
 
 typedef struct s_fdf
 {
@@ -49,6 +51,14 @@ typedef struct s_line
 	int		color;
 }	t_line;
 
+typedef struct s_rect
+{
+	int	top[2];
+	int	right[2];
+	int	bottom[2];
+	int	left[2];
+}	t_rect;
+
 typedef enum e_events
 {
 	ON_KEYDOWN = 2,
@@ -73,7 +83,7 @@ int		draw_line(t_img *img, int coords[4], int color);
 
 /* RECT */
 
-int		draw_rect_p(t_img *img, int coords[4][2], int a, int color);
+t_rect	*draw_rect_p(t_img *img, int coords[4][2], int a, int color);
 
 /* UTILS */
 
