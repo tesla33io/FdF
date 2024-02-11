@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 20:08:43 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/10 17:57:19 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/11 19:38:16 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,19 @@ int	main(void)
 	void	*mlx_win;
 	t_fdf	*fdf;
 	t_img	img;
-	t_line	*l;
 
 	fdf = malloc(1 * sizeof(t_fdf));
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, DEF_SCRN_X, DEF_SCRN_Y, W_NAME);
 	fdf->mlx = mlx;
 	fdf->win = mlx_win;
-	img.img = mlx_new_image(mlx, DEF_SCRN_X - 200, DEF_SCRN_Y - 200);
+	img.img = mlx_new_image(mlx, DEF_SCRN_X, DEF_SCRN_Y);
 	img.addr = mlx_get_data_addr(img.img, &img.bpp,
 			&img.line_l, &img.endian);
-	l = line_init(10, 10, 10, 150);
-	l->img = &img;
-	l->color = 0xFFFFFFFF;
-	ft_printf(1, "Before drawing process....\n");
-	draw_line(l);
+	draw_rect_p(&img, (int []){34, 23, 12, 567, 345, 456}, 120, 0xFFFFFFFF);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 10, 10);
 	hook_init(fdf);
 	mlx_loop(mlx);
 	free(fdf);
-	free(l);
 	return (0);
 }

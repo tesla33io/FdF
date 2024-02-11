@@ -6,7 +6,7 @@
 #    By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 17:41:42 by astavrop          #+#    #+#              #
-#    Updated: 2024/02/10 17:48:40 by astavrop         ###   ########.fr        #
+#    Updated: 2024/02/11 18:48:46 by astavrop         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,9 @@ NAME				= fdf
 
 SRCS				+= fdf.c
 SRCS				+= hooks.c
-SRCS				+= draw.c
+SRCS				+= line.c
 SRCS				+= utils.c
+SRCS				+= rect.c
 OBJS				= $(SRCS:.c=.o)
 
 FT_PINTF_PATH		= ./ft_printf/
@@ -38,13 +39,14 @@ MLX_PATH			= ./minilibx-linux/
 all: $(NAME)
 
 
-%.o: %.c
+%.o: %.c fdf.h key_codes.h
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 
 $(NAME): $(OBJS) $(LFT_BIN) $(FT_PINTF_BIN)
-	@if [ ! -d $(MLX_PATH) ]; then \
-		@make -s compile-mlx; \
+	@if [ ! -e "$(MLX_PATH)$(MLX_BIN)" ]; then \
+		echo -n "\033[32;49;3m... Clone MiniLibX ...\033[0m\r"; \
+		make -s compile-mlx; \
 	fi
 	@echo -n "\033[32;49;3m... Compiling code ...\033[0m\r"
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INCLUDES) $(LIBS)
@@ -64,6 +66,8 @@ $(LFT_BIN):
 
 
 compile-mlx:
+	@rm -rf $(MLX_PATH)
+	@git clone https://github.com/42Paris/minilibx-linux.git
 	@echo -n "\033[32;49;3m... Making MiniLibX ...\033[0m\r"
 	@make -C $(MLX_PATH)
 	@echo -n "\033[32;49;1m> MiniLibX ready! <\033[0m\r    "

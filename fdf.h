@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 20:54:16 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/10 17:53:17 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/11 19:22:59 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # define DEF_SCRN_X 960
 # define DEF_SCRN_Y 540
 # define W_NAME "._."
+# define D 100
+# define VP1_X 100
+# define VP1_Y 42
+# define VP2_X 400
+# define VP2_Y 420
 
 typedef struct s_fdf
 {
@@ -62,9 +67,14 @@ int		terminate(t_fdf *fdf);
 
 int		key_up_hook(int k, t_fdf *fdf);
 
-/* DRAW */
+/* LINE */
 
-int		draw_line(t_line *line);
+int		draw_line(t_img *img, int coords[4], int color);
+
+/* RECT */
+
+int		draw_rect(t_img *img, int coords[4], int color);
+int		draw_rect_p(t_img *img, int coords[6], int a, int color);
 
 /* UTILS */
 
