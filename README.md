@@ -1,4 +1,7 @@
-# FdF
+<p align="center">
+	<img alt="FDF BADGE" src="https://github.com/tesla33io/FdF/blob/main/badge.png?raw=true" width="200">
+</p>
+
 This project is about creating a simple wireframe model of a landscape.
 
 <details>
