@@ -6,7 +6,7 @@
 #    By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 17:41:42 by astavrop          #+#    #+#              #
-#    Updated: 2024/02/11 18:48:46 by astavrop         ###   ########.fr        #
+#    Updated: 2024/02/11 21:05:11 by astavrop         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,10 @@ $(NAME): $(OBJS) $(LFT_BIN) $(FT_PINTF_BIN)
 	@echo -n "\033[32;49;3m... Compiling code ...\033[0m\r"
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INCLUDES) $(LIBS)
 	@echo "\033[32;49;1m>>>   Done!   <<<\033[0m          "
+
+
+test: $(NAME)
+	./$(NAME)
 
 
 $(FT_PINTF_BIN):

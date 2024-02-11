@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 20:08:43 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/11 19:38:16 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/11 21:13:51 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,14 @@ int	main(void)
 
 	fdf = malloc(1 * sizeof(t_fdf));
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, DEF_SCRN_X, DEF_SCRN_Y, W_NAME);
+	mlx_win = mlx_new_window(mlx, SCRN_X, SCRN_Y, W_NAME);
 	fdf->mlx = mlx;
 	fdf->win = mlx_win;
-	img.img = mlx_new_image(mlx, DEF_SCRN_X, DEF_SCRN_Y);
+	img.img = mlx_new_image(mlx, SCRN_X, SCRN_Y);
 	img.addr = mlx_get_data_addr(img.img, &img.bpp,
 			&img.line_l, &img.endian);
-	draw_rect_p(&img, (int []){34, 23, 12, 567, 345, 456}, 120, 0xFFFFFFFF);
+	draw_rect_p(&img, (int [4][2]){{SPX, SPY}, {SPX + W, SPY}, {SPX + W, SPY + H}, {SPX, SPY + H}},
+		120, 0xFFFFFFFF);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 10, 10);
 	hook_init(fdf);
 	mlx_loop(mlx);

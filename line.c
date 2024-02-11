@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 11:36:14 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/11 19:17:05 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/11 20:53:46 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	update_pos(int *err, int dx, int dy, int *coords)
  * @note The function performs input validation:
  *   - Checks if the image pointer (`img`) is valid.
  *   - Ensures starting and ending coordinates are within the image
- * boundaries defined by `DEF_SCRN_X` and `DEF_SCRN_Y`.
+ * boundaries defined by `SCRN_X` and `DEF_SCRN_Y`.
  *
  * @param img: Pointer to the image data buffer.
  * @param coords: Array of four integers representing the line coordinates:
@@ -89,8 +89,8 @@ int	draw_line(t_img *img, int coords[4], int color)
 
 	if (!img || !img->addr)
 		return (ft_printf(2, "E: Invalid image.\n"), 1);
-	if ((coords[0] > DEF_SCRN_X || coords[1] > DEF_SCRN_Y)
-		|| (coords[2] > DEF_SCRN_X || coords[3] > DEF_SCRN_Y))
+	if ((coords[0] > SCRN_X || coords[1] > SCRN_Y)
+		|| (coords[2] > SCRN_X || coords[3] > SCRN_Y))
 		return (ft_printf(2, "E: Invalid coordinates (%d %d %d %d).\n",
 				coords[0], coords[1], coords[2], coords[3]), 1);
 	dx = abs(coords[2] - coords[0]);
