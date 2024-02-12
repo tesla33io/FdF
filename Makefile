@@ -6,7 +6,7 @@
 #    By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 17:41:42 by astavrop          #+#    #+#              #
-#    Updated: 2024/02/11 21:21:06 by astavrop         ###   ########.fr        #
+#    Updated: 2024/02/12 16:20:05 by astavrop         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,14 +15,10 @@ CFLAGS				= -Wall -Werror -Wextra -g
 LIBS				+= -L$(FT_PINTF_PATH) -L$(LFT_PATH) -lftprintf -lft
 LIBS				+= -L$(MLX_PATH) -lmlx -L/usr/lib/X11 -lXext -lX11
 LIBS				+= -lm
-INCLUDES			= -I/usr/include -Imlx_linux -Ift_printf -Ilibft -I.
+INCLUDES			= -I/usr/include -Iminilibx-linux -Ift_printf/includes -Ilibft -I.
 NAME				= fdf
 
-SRCS				+= fdf.c
-SRCS				+= hooks.c
-SRCS				+= line.c
-SRCS				+= utils.c
-SRCS				+= rect.c
+SRCS				+= 1_main.c
 OBJS				= $(SRCS:.c=.o)
 
 FT_PINTF_PATH		= ./ft_printf/
@@ -40,7 +36,7 @@ all: $(NAME)
 
 
 %.o: %.c fdf.h key_codes.h
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 
 $(NAME): $(OBJS) $(LFT_BIN) $(FT_PINTF_BIN)
