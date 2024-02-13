@@ -6,7 +6,7 @@
 #    By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 17:41:42 by astavrop          #+#    #+#              #
-#    Updated: 2024/02/12 16:20:05 by astavrop         ###   ########.fr        #
+#    Updated: 2024/02/13 21:24:39 by astavrop         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,11 +15,24 @@ CFLAGS				= -Wall -Werror -Wextra -g
 LIBS				+= -L$(FT_PINTF_PATH) -L$(LFT_PATH) -lftprintf -lft
 LIBS				+= -L$(MLX_PATH) -lmlx -L/usr/lib/X11 -lXext -lX11
 LIBS				+= -lm
-INCLUDES			= -I/usr/include -Iminilibx-linux -Ift_printf/includes -Ilibft -I.
+INCLUDES			+= -I/usr/include -Imlx-linux -Ift_printf/includes -I./libft -I.
+INCLUDES			+= -Ignl
 NAME				= fdf
 
 SRCS				+= 1_main.c
-OBJS				= $(SRCS:.c=.o)
+SRCS				+= 2_checks.c
+SRCS				+= 3_parse_map.c
+SRCS				+= 4_mlx_init.c
+SRCS				+= 5_struct_init.c
+SRCS				+= 6_draw.c
+SRCS				+= 7_line.c
+SRCS				+= 8_hooks.c
+
+SRCS				+= 99_utils.c
+SRCS				+= gnl/get_next_line.c
+OBJ_DIR				= obj
+OBJS				= $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
+
 
 FT_PINTF_PATH		= ./ft_printf/
 FT_PINTF_BIN		= $(FT_PINTF_PATH)libftprintf.a
@@ -35,7 +48,8 @@ MLX_PATH			= ./minilibx-linux/
 all: $(NAME)
 
 
-%.o: %.c fdf.h key_codes.h
+$(OBJ_DIR)/%.o: %.c fdf.h
+	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 
@@ -85,6 +99,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@make -sC $(FT_PINTF_PATH) fclean
+	@rm -rf $(OBJ_DIR)
 	@echo "\033[32mft_printf cleand!\033[0m"
 	@make -sC $(LFT_PATH) fclean
 	@echo "\033[32mlibft cleand!\033[0m"
