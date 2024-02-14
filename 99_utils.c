@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:26:31 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/13 20:12:51 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/14 22:14:19 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,12 @@ int	count_lines(char *fn)
 	return (i);
 }
 
-int	count_cols(char *line, char c)
+int	count_cols(char **arr)
 {
-	char	**arr;
-	int		i;
+	int	i;
 
-	arr = ft_split(line, c);
 	i = 0;
 	while (arr[i])
-	{
-		free(arr[i]);
 		i++;
-	}
-	free(arr);
 	return (i);
 }

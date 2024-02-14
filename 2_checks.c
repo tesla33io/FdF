@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:04:36 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/13 20:00:18 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/14 22:12:28 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ void	check_file(char **argv)
 {
 	int		fd;
 	char	*line;
-	int		ll;
-	int		error;
 
-	error = 0;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		error_exit("Can't open your map.", 1);
@@ -65,14 +62,7 @@ void	check_file(char **argv)
 		close(fd);
 		error_exit("Can't read from your map.", 1);
 	}
-	ll = ft_strlen(line);
 	while (line)
-	{
-		if (ll != ft_strlen(line))
-			error = 1;
 		retrieve_line(fd, &line);
-	}
 	close(fd);
-	if (error)
-		error_exit("Your map is invalid.", 1);
 }

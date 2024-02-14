@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:37:41 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/14 21:50:15 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/14 22:46:53 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	parse_file(t_fdf *fdf, char **argv)
 	i = 0;
 	fdf->map = malloc(fdf->rows * sizeof(char *));
 	line = get_next_line(fd);
-	fdf->cols = count_cols(line, ' ');
 	if (!line)
 		error_exit("Can't parse the line.", 1);
 	while (line)
@@ -49,16 +48,19 @@ t_dot	*parse_row(t_fdf *fdf, int index)
 	char	**s;
 	int		i;
 
-	dots = malloc(fdf->cols * sizeof(t_dot));
 	s = ft_split(fdf->map[index], ' ');
+	if (!s)
+		return (NULL);
+	fdf->row_len[index] = count_cols(s);
+	dots = malloc(fdf->row_len[index] * sizeof(t_dot));
 	if (!dots)
 		return (NULL);
 	i = 0;
-	while (i < fdf->cols)
+	while (i < fdf->row_len[index])
 	{
 		dots[i].z = atoi(s[i]);
-		dots[i].x = fdf->x_start + i * fdf->step;
-		dots[i].y = fdf->y_start + index * fdf->step;
+		dots[i].x = fdf->x_start + index * fdf->step;
+		dots[i].y = fdf->y_start - i * fdf->step;
 		i++;
 	}
 	i = 0;
@@ -75,6 +77,7 @@ t_dot	**get_matrix(t_fdf *fdf)
 
 	i = 0;
 	matrix = malloc(fdf->rows * sizeof(t_dot *));
+	fdf->row_len = malloc(fdf->rows * sizeof(int));
 	if (!matrix)
 		error_exit("memory allocation failed during matrix generation.", 1);
 	while (i < fdf->rows)
@@ -84,7 +87,8 @@ t_dot	**get_matrix(t_fdf *fdf)
 	}
 	for (int a = 0; a < fdf->rows; a++)
 	{
-		for (int b = 0; b <fdf->cols; b++)
+		ft_printf(1, "<%d> ", fdf->row_len[a]);
+		for (int b = 0; b < fdf->row_len[a]; b++)
 		{
 			ft_printf(1, "[%i,%i,%i] ", matrix[a][b].x, matrix[a][b].y, matrix[a][b].z);
 		}

@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:19:04 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/14 21:49:50 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/14 22:57:12 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,11 @@ typedef struct s_fdf
 	int		angle;
 	int		x_start;
 	int		y_start;
-	int		step;
+	double	step;
 	char	**map;
 	t_dot	**matrix;
 	t_dot	**trm;
+	int		*row_len;
 	void	*mlx;
 	void	*win;
 	t_img	img;
@@ -122,7 +123,7 @@ void		connect_points(t_fdf *fdf);
 /* UTILS */
 
 int			count_lines(char *fn);
-int			count_cols(char *line, char c);
+int			count_cols(char **arr);
 
 # define KEY_UP			65362
 # define KEY_DOWN		65364

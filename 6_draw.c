@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 20:50:40 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/14 17:46:58 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/14 23:01:34 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ void	place_points(t_fdf *fdf)
 	while (i < fdf->rows)
 	{
 		j = 0;
-		fdf->trm[i] = malloc(fdf->cols * sizeof(t_dot));
-		while (j < fdf->cols)
+		fdf->trm[i] = malloc(fdf->row_len[i] * sizeof(t_dot));
+		while (j < fdf->row_len[i])
 		{
 			fdf->trm[i][j].x = rotate_coords(fdf->matrix[i][j], fdf, &cos);
 			fdf->trm[i][j].y = rotate_coords(fdf->matrix[i][j], fdf, &sin);
 			fdf->trm[i][j].z = 0;
-			ft_put_pixel(&fdf->img, fdf->trm[i][j].x, fdf->trm[i][j].y, 0xF00FFFFF);
+			ft_put_pixel(&fdf->img, fdf->trm[i][j].x,
+				fdf->trm[i][j].y, 0xF00FFFFF);
 			j++;
 		}
 		i++;
@@ -58,14 +59,14 @@ void	connect_points(t_fdf *fdf)
 	while (i < fdf->rows)
 	{
 		j = 0;
-		while (j < fdf->cols)
+		while (j < fdf->row_len[i])
 		{
-			if (j < fdf->cols - 1)
+			if (j < fdf->row_len[i] - 1)
 				draw_line(&fdf->img, (int[4]){m[i][j].x, m[i][j].y,
-					m[i][j + 1].x, m[i][j + 1].y}, 0xFFFFFFFF);
-			if (i < fdf->rows - 1)
+					m[i][j + 1].x, m[i][j + 1].y}, 0x00FF0000);
+			if (i < fdf->row_len[i] - 1)
 				draw_line(&fdf->img, (int[4]){m[i][j].x, m[i][j].y,
-					m[i + 1][j].x, m[i + 1][j].y}, 0xF0FFFFFF);
+					m[i + 1][j].x, m[i + 1][j].y}, 0xAAFFAAAA);
 			j++;
 		}
 		i++;
