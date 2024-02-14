@@ -6,7 +6,7 @@
 #    By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 17:41:42 by astavrop          #+#    #+#              #
-#    Updated: 2024/02/13 21:24:39 by astavrop         ###   ########.fr        #
+#    Updated: 2024/02/14 16:27:30 by astavrop         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ $(NAME): $(OBJS) $(LFT_BIN) $(FT_PINTF_BIN)
 
 
 test: $(NAME)
-	./$(NAME)
+	./$(NAME) test.fdf
 
 
 norm: $(SRCS)

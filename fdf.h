@@ -6,18 +6,20 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:19:04 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/13 21:24:50 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/14 17:51:01 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# define NAME "- _ -"
-# define WIDTH 1280
+# define NAME "4O4. name not found"
+# define WIDTH 720
 # define HEIGHT 720
 
-# define STEP 50
+# define STEP 75
+# define START_X 200
+# define START_Y 500
 
 // # inlcude <stddef.h>
 # include "mlx.h"
@@ -54,8 +56,10 @@ typedef struct s_fdf
 {
 	int		rows;
 	int		cols;
+	int		angle;
 	char	**map;
 	t_dot	**matrix;
+	t_dot	**trm;
 	void	*mlx;
 	void	*win;
 	t_img	img;
@@ -110,6 +114,7 @@ int			draw_line(t_img *img, int coords[4], int color);
 /* DRAW UTILS */
 
 void		place_points(t_fdf *fdf);
+void		connect_points(t_fdf *fdf);
 
 /* UTILS */
 

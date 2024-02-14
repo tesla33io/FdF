@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:37:41 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/13 20:58:26 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/14 17:07:07 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ t_dot	*parse_row(t_fdf *fdf, int index)
 	while (i < fdf->cols)
 	{
 		dots[i].z = atoi(s[i]);
-		dots[i].x = i;
-		dots[i].y = index;
+		dots[i].x = START_X + i * STEP;
+		dots[i].y = START_Y + index * STEP;
 		i++;
 	}
 	i = 0;
@@ -81,6 +81,14 @@ t_dot	**get_matrix(t_fdf *fdf)
 	{
 		matrix[i] = parse_row(fdf, i);
 		i++;
+	}
+	for (int a = 0; a < fdf->rows; a++)
+	{
+		for (int b = 0; b <fdf->cols; b++)
+		{
+			ft_printf(1, "[%i,%i,%i] ", matrix[a][b].x, matrix[a][b].y, matrix[a][b].z);
+		}
+		ft_printf(1, "\n");
 	}
 	return (matrix);
 }

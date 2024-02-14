@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:18:37 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/13 21:15:54 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/14 17:35:03 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int	main(int argc, char **argv)
 	fdf->matrix = get_matrix(fdf);
 	start_mlx(fdf);
 	place_points(fdf);
-	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img.img, 1, 1);
+	connect_points(fdf);
+	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img.img, 0, 0);
 	hook_init(fdf);
 	mlx_loop(fdf->mlx);
 	free(fdf);
