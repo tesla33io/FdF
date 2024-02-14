@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 20:54:45 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/14 16:34:14 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/14 21:48:30 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	ft_put_pixel(t_img *data, int x, int y, int color)
 {
 	char	*dst;
 
+	if ((x < 0 || x > data->width) || (y < 0 || y > data->height))
+		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bpp / 8));
 	*(unsigned int *)dst = color;
 }
