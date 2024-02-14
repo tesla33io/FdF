@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:18:37 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/14 17:35:03 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/14 21:50:33 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	main(int argc, char **argv)
 	fdf = malloc(sizeof(t_fdf));
 	input_check(argc, argv);
 	check_file(argv);
+	start_mlx(fdf);
 	parse_file(fdf, argv);
 	fdf->matrix = get_matrix(fdf);
-	start_mlx(fdf);
 	place_points(fdf);
 	connect_points(fdf);
 	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img.img, 0, 0);

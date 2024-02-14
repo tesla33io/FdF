@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:19:04 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/14 17:51:01 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/14 21:49:50 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ typedef struct s_fdf
 	int		rows;
 	int		cols;
 	int		angle;
+	int		x_start;
+	int		y_start;
+	int		step;
 	char	**map;
 	t_dot	**matrix;
 	t_dot	**trm;
