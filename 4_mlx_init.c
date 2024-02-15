@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 20:39:16 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/14 22:51:31 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/15 17:20:51 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	start_mlx(t_fdf *fdf)
 {
 	fdf->mlx = mlx_init();
 	fdf->win = mlx_new_window(fdf->mlx, WIDTH, HEIGHT, NAME);
-	fdf->angle = 45;
+	fdf->angle = 120;
 	fdf->img.img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
 	fdf->img.addr = mlx_get_data_addr(fdf->img.img, &fdf->img.bpp,
 			&fdf->img.line_length, &fdf->img.endian);
 	fdf->img.width = WIDTH;
 	fdf->img.height = HEIGHT;
 	fdf->x_start = 350;
-	fdf->y_start = 50;
+	fdf->y_start = 200;
 	fdf->step = 20;
 }
 

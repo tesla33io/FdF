@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 19:26:31 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/14 22:14:19 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/15 20:10:57 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,12 @@ int	count_cols(char **arr)
 	while (arr[i])
 		i++;
 	return (i);
+}
+
+int	calc_color(t_dot *s, t_dot *e)
+{
+	if (s->z == e->z)
+		return (0xFFFFFF);
+	else
+		return (0xFF0000);
 }

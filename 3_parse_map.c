@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:37:41 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/14 22:46:53 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/15 18:40:48 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,12 @@ void	parse_file(t_fdf *fdf, char **argv)
 		i++;
 	}
 	free(line);
+	close(fd);
 }
 
-t_dot	*parse_row(t_fdf *fdf, int index)
+t_dot	**parse_row(t_fdf *fdf, int index)
 {
-	t_dot	*dots;
+	t_dot	**dots;
 	char	**s;
 	int		i;
 
@@ -52,15 +53,16 @@ t_dot	*parse_row(t_fdf *fdf, int index)
 	if (!s)
 		return (NULL);
 	fdf->row_len[index] = count_cols(s);
-	dots = malloc(fdf->row_len[index] * sizeof(t_dot));
+	dots = malloc(fdf->row_len[index] * sizeof(t_dot *));
 	if (!dots)
 		return (NULL);
 	i = 0;
 	while (i < fdf->row_len[index])
 	{
-		dots[i].z = atoi(s[i]);
-		dots[i].x = fdf->x_start + index * fdf->step;
-		dots[i].y = fdf->y_start - i * fdf->step;
+		dots[i] = malloc(sizeof(t_dot));
+		dots[i]->z = atoi(s[i]);
+		dots[i]->x = fdf->x_start + index * fdf->step;
+		dots[i]->y = fdf->y_start - i * fdf->step;
 		i++;
 	}
 	i = 0;
@@ -70,13 +72,13 @@ t_dot	*parse_row(t_fdf *fdf, int index)
 	return (dots);
 }
 
-t_dot	**get_matrix(t_fdf *fdf)
+t_dot	***get_matrix(t_fdf *fdf)
 {
-	t_dot	**matrix;
+	t_dot	***matrix;
 	int		i;
 
 	i = 0;
-	matrix = malloc(fdf->rows * sizeof(t_dot *));
+	matrix = malloc(fdf->rows * sizeof(t_dot **));
 	fdf->row_len = malloc(fdf->rows * sizeof(int));
 	if (!matrix)
 		error_exit("memory allocation failed during matrix generation.", 1);
@@ -85,25 +87,19 @@ t_dot	**get_matrix(t_fdf *fdf)
 		matrix[i] = parse_row(fdf, i);
 		i++;
 	}
+	return (matrix);
+}
+
+/**
+ * ft_printf(1, "rows: %d\n", fdf->rows);
 	for (int a = 0; a < fdf->rows; a++)
 	{
 		ft_printf(1, "<%d> ", fdf->row_len[a]);
 		for (int b = 0; b < fdf->row_len[a]; b++)
 		{
-			ft_printf(1, "[%i,%i,%i] ", matrix[a][b].x, matrix[a][b].y, matrix[a][b].z);
+			ft_printf(1, "[%i,%i,%i] ", matrix[a][b]->x, matrix[a][b]->y, matrix[a][b]->z);
 		}
 		ft_printf(1, "\n");
 	}
-	return (matrix);
-}
-
-/**
- * for (int a = 0; a < fdf->rows; a++)
- * 	{
- * 		for (int b = 0; b <fdf->cols; b++)
- * 		{
- * 			ft_printf(1, "[%i] ", matrix[a][b].z);
- * 		}
- * 		ft_printf(1, "\n");
- * 	}
+	ft_printf(1, "\n\n-*-*-*-*-*-*-*-*-*-*-*-\n\n");
  */

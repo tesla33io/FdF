@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:18:37 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/14 22:25:07 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/15 20:01:40 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,7 @@
 
 int	terminate(t_fdf *fdf)
 {
-	if (fdf->win)
-		mlx_destroy_window(fdf->mlx, fdf->win);
-	if (fdf->mlx)
-	{
-		mlx_loop_end(fdf->mlx);
-		mlx_destroy_display(fdf->mlx);
-		free(fdf->mlx);
-	}
-	free(fdf);
+	clear_all(fdf);
 	exit (0);
 	return (0);
 }
@@ -44,9 +36,9 @@ int	main(int argc, char **argv)
 	fdf->matrix = get_matrix(fdf);
 	place_points(fdf);
 	connect_points(fdf);
-	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img.img, 0, 0);
+	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->img.img, 1, 1);
 	hook_init(fdf);
 	mlx_loop(fdf->mlx);
-	free(fdf);
+	clear_all(fdf);
 	return (0);
 }

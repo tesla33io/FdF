@@ -6,12 +6,12 @@
 #    By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 17:41:42 by astavrop          #+#    #+#              #
-#    Updated: 2024/02/14 16:27:30 by astavrop         ###   ########.fr        #
+#    Updated: 2024/02/15 20:51:16 by astavrop         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC					= cc
-CFLAGS				= -Wall -Werror -Wextra -g
+CFLAGS				= -Wall -Werror -Wextra -pedantic -g
 LIBS				+= -L$(FT_PINTF_PATH) -L$(LFT_PATH) -lftprintf -lft
 LIBS				+= -L$(MLX_PATH) -lmlx -L/usr/lib/X11 -lXext -lX11
 LIBS				+= -lm
@@ -23,11 +23,11 @@ SRCS				+= 1_main.c
 SRCS				+= 2_checks.c
 SRCS				+= 3_parse_map.c
 SRCS				+= 4_mlx_init.c
-SRCS				+= 5_struct_init.c
 SRCS				+= 6_draw.c
 SRCS				+= 7_line.c
 SRCS				+= 8_hooks.c
 
+SRCS				+= 98_clear.c
 SRCS				+= 99_utils.c
 SRCS				+= gnl/get_next_line.c
 OBJ_DIR				= obj
@@ -48,7 +48,7 @@ MLX_PATH			= ./minilibx-linux/
 all: $(NAME)
 
 
-$(OBJ_DIR)/%.o: %.c fdf.h
+$(OBJ_DIR)/%.o: %.c fdf.h colors.h
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 

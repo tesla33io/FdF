@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:19:04 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/14 22:57:12 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/15 20:48:14 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ typedef struct s_fdf
 	int		y_start;
 	double	step;
 	char	**map;
-	t_dot	**matrix;
-	t_dot	**trm;
+	t_dot	***matrix;
+	t_dot	***trm;
 	int		*row_len;
 	void	*mlx;
 	void	*win;
@@ -101,7 +101,7 @@ void		print_usage(void);
 /* PARSING */
 
 void		parse_file(t_fdf *fdf, char **argv);
-t_dot		**get_matrix(t_fdf *fdf);
+t_dot		***get_matrix(t_fdf *fdf);
 
 /* MLX STUFF */
 
@@ -124,6 +124,9 @@ void		connect_points(t_fdf *fdf);
 
 int			count_lines(char *fn);
 int			count_cols(char **arr);
+int			calc_color(t_dot *s, t_dot *e);
+
+void		clear_all(t_fdf *fdf);
 
 # define KEY_UP			65362
 # define KEY_DOWN		65364
