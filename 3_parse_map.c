@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:37:41 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/15 18:40:48 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:52:08 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,22 @@ void	parse_file(t_fdf *fdf, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	fdf->rows = count_lines(argv[1]);
 	i = 0;
-	fdf->map = malloc(fdf->rows * sizeof(char *));
+	fdf->map = malloc((fdf->rows + 1) * sizeof(char *));
+	if (!fdf->map)
+		ft_printf(2, "[parse_fill:fdf->map]:MAE:\n");
 	line = get_next_line(fd);
 	if (!line)
 		error_exit("Can't parse the line.", 1);
 	while (line)
 	{
 		fdf->map[i] = ft_strdup(line);
+		if (!fdf->map[i])
+			ft_printf(2, "[parse_file:fdf->map[i]]:MAE:\n");
 		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
+	fdf->map[i] = NULL;
 	free(line);
 	close(fd);
 }
@@ -53,7 +58,9 @@ t_dot	**parse_row(t_fdf *fdf, int index)
 	if (!s)
 		return (NULL);
 	fdf->row_len[index] = count_cols(s);
-	dots = malloc(fdf->row_len[index] * sizeof(t_dot *));
+	dots = malloc((1 + fdf->row_len[index]) * sizeof(t_dot *));
+	if (!dots)
+		ft_printf(2, "[parse_row]:MAE:\n");
 	if (!dots)
 		return (NULL);
 	i = 0;
@@ -65,9 +72,9 @@ t_dot	**parse_row(t_fdf *fdf, int index)
 		dots[i]->y = fdf->y_start - i * fdf->step;
 		i++;
 	}
-	i = 0;
-	while (s[i])
-		free(s[i++]);
+	i = -1;
+	while (s[++i])
+		free(s[i]);
 	free(s);
 	return (dots);
 }
@@ -78,7 +85,7 @@ t_dot	***get_matrix(t_fdf *fdf)
 	int		i;
 
 	i = 0;
-	matrix = malloc(fdf->rows * sizeof(t_dot **));
+	matrix = malloc((1 + fdf->rows) * sizeof(t_dot **));
 	fdf->row_len = malloc(fdf->rows * sizeof(int));
 	if (!matrix)
 		error_exit("memory allocation failed during matrix generation.", 1);
@@ -87,6 +94,7 @@ t_dot	***get_matrix(t_fdf *fdf)
 		matrix[i] = parse_row(fdf, i);
 		i++;
 	}
+	matrix[i] = NULL;
 	return (matrix);
 }
 

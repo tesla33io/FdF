@@ -6,12 +6,12 @@
 #    By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 17:41:42 by astavrop          #+#    #+#              #
-#    Updated: 2024/02/15 20:51:16 by astavrop         ###   ########.fr        #
+#    Updated: 2024/02/16 19:16:42 by astavrop         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC					= cc
-CFLAGS				= -Wall -Werror -Wextra -pedantic -g
+CFLAGS				= -Wall -Werror -Wextra -pedantic -g3 -O0
 LIBS				+= -L$(FT_PINTF_PATH) -L$(LFT_PATH) -lftprintf -lft
 LIBS				+= -L$(MLX_PATH) -lmlx -L/usr/lib/X11 -lXext -lX11
 LIBS				+= -lm

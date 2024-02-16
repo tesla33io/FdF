@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 20:50:40 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/15 20:35:28 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:51:43 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,16 @@ void	place_points(t_fdf *fdf)
 	int		j;
 
 	i = 0;
-	fdf->trm = malloc(fdf->rows * sizeof(t_dot **));
+	fdf->trm = malloc((1 + fdf->rows) * sizeof(t_dot **));
 	if (!fdf->trm)
 		return ;
 	while (i < fdf->rows)
 	{
-		j = 0;
+		j = -1;
 		fdf->trm[i] = malloc(fdf->row_len[i] * sizeof(t_dot *));
-		while (j < fdf->row_len[i])
+		if (!fdf->trm[i])
+			ft_printf(2, "[place_points]:Memory allocation error! i = %d\n", i);
+		while (++j < fdf->row_len[i])
 		{
 			fdf->trm[i][j] = malloc(sizeof(t_dot));
 			fdf->trm[i][j]->x = rotate_coords(fdf->matrix[i][j], fdf, &cos);
@@ -45,10 +47,10 @@ void	place_points(t_fdf *fdf)
 			fdf->trm[i][j]->z = 0;
 			ft_put_pixel(&fdf->img, fdf->trm[i][j]->x,
 				fdf->trm[i][j]->y, 0xF00FFFFF);
-			j++;
 		}
 		i++;
 	}
+	fdf->trm[i] = NULL;
 }
 
 void	connect_points(t_fdf *fdf)
@@ -64,13 +66,13 @@ void	connect_points(t_fdf *fdf)
 		j = -1;
 		while (++j < fdf->row_len[i] - 1)
 		{
-			if (m[i][j + 1])
+			if (m[i][j + 1] != NULL)
 			{
 				draw_line(&fdf->img, (int [4]){m[i][j]->x, m[i][j]->y,
 					m[i][j + 1]->x, m[i][j + 1]->y},
 					calc_color(fdf->matrix[i][j], fdf->matrix[i][j + 1]));
 			}
-			if (m[i + 1][j])
+			if (m[i + 1][j] != NULL)
 			{
 				draw_line(&fdf->img, (int [4]){m[i][j]->x, m[i][j]->y,
 					m[i + 1][j]->x, m[i + 1][j]->y},

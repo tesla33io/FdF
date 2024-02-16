@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 17:39:11 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/15 21:04:14 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:44:34 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@
 #include "ft_printf.h"
 #include "colors.h"
 
-void	dfree(char *msg, void *ptr)
-{
-	ft_printf(1, "[%s]free ptr: %p\n", msg, ptr);
-	free(ptr);
-}
-
 void	clear_map(char **map)
 {
 	int	i;
@@ -32,13 +26,13 @@ void	clear_map(char **map)
 	i = 0;
 	while (map[i])
 	{
-		dfree("map loop", map[i]);
+		free(map[i]);
 		i++;
 	}
-	dfree("map end", map);
+	free(map);
 }
 
-void	clear_matrix(t_dot ***m)
+void	clear_matrix(t_fdf *fdf, t_dot ***m)
 {
 	int	i;
 	int	j;
@@ -49,17 +43,17 @@ void	clear_matrix(t_dot ***m)
 	while (m[i])
 	{
 		j = 0;
-		while (m[i][j])
+		while (j < fdf->row_len[i])
 		{
 			if (m[i][j])
-				dfree("mat loop2", m[i][j]);
+				free(m[i][j]);
 			j++;
 		}
 		if (m[i])
-			dfree("mat loop1", m[i]);
+			free(m[i]);
 		i++;
 	}
-	dfree("mat end", m);
+	free(m);
 }
 
 void	clear_all(t_fdf *fdf)
@@ -67,11 +61,11 @@ void	clear_all(t_fdf *fdf)
 	if (!fdf)
 		return ;
 	clear_map(fdf->map);
-	clear_matrix(fdf->matrix);
-	clear_matrix(fdf->trm);
+	clear_matrix(fdf, fdf->matrix);
+	clear_matrix(fdf, fdf->trm);
 	free(fdf->row_len);
 	if (fdf->img.img)
-		free(fdf->img.img);
+		mlx_destroy_image(fdf->mlx, fdf->img.img);
 	if (fdf->win)
 		mlx_destroy_window(fdf->mlx, fdf->win);
 	if (fdf->mlx)
