@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 20:39:16 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/15 17:20:51 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/16 21:09:27 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 #include "ft_printf.h"
 #include "colors.h"
 
-void	start_mlx(t_fdf *fdf)
+void	start_mlx(t_fdf *fdf, char *wname)
 {
 	fdf->mlx = mlx_init();
-	fdf->win = mlx_new_window(fdf->mlx, WIDTH, HEIGHT, NAME);
+	fdf->win = mlx_new_window(fdf->mlx, WIDTH, HEIGHT, wname);
 	fdf->angle = 120;
 	fdf->img.img = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
 	fdf->img.addr = mlx_get_data_addr(fdf->img.img, &fdf->img.bpp,

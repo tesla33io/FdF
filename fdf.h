@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:19:04 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/15 20:48:14 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/16 21:09:16 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_dot		***get_matrix(t_fdf *fdf);
 
 /* MLX STUFF */
 
-void		start_mlx(t_fdf *fdf);
+void		start_mlx(t_fdf *fdf, char *wname);
 void		hook_init(t_fdf *fdf);
 int			terminate(t_fdf *fdf);
 int			key_up_hook(int k, t_fdf *fdf);
