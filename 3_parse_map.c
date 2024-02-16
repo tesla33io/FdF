@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:37:41 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/16 19:52:08 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:53:42 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ t_dot	**parse_row(t_fdf *fdf, int index)
 	fdf->row_len[index] = count_cols(s);
 	dots = malloc((1 + fdf->row_len[index]) * sizeof(t_dot *));
 	if (!dots)
-		ft_printf(2, "[parse_row]:MAE:\n");
-	if (!dots)
 		return (NULL);
 	i = 0;
 	while (i < fdf->row_len[index])
@@ -105,7 +103,8 @@ t_dot	***get_matrix(t_fdf *fdf)
 		ft_printf(1, "<%d> ", fdf->row_len[a]);
 		for (int b = 0; b < fdf->row_len[a]; b++)
 		{
-			ft_printf(1, "[%i,%i,%i] ", matrix[a][b]->x, matrix[a][b]->y, matrix[a][b]->z);
+			ft_printf(1, "[%i,%i,%i] ", matrix[a][b]->x,
+				matrix[a][b]->y, matrix[a][b]->z);
 		}
 		ft_printf(1, "\n");
 	}
