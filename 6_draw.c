@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 20:50:40 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/16 19:51:43 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/16 20:58:16 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,22 +61,22 @@ void	connect_points(t_fdf *fdf)
 
 	i = -1;
 	m = fdf->trm;
-	while (++i < fdf->rows - 1)
+	while (++i < fdf->rows)
 	{
 		j = -1;
-		while (++j < fdf->row_len[i] - 1)
+		while (++j < fdf->row_len[i])
 		{
-			if (m[i][j + 1] != NULL)
-			{
-				draw_line(&fdf->img, (int [4]){m[i][j]->x, m[i][j]->y,
-					m[i][j + 1]->x, m[i][j + 1]->y},
-					calc_color(fdf->matrix[i][j], fdf->matrix[i][j + 1]));
-			}
-			if (m[i + 1][j] != NULL)
+			if (i + 1 < fdf->rows)
 			{
 				draw_line(&fdf->img, (int [4]){m[i][j]->x, m[i][j]->y,
 					m[i + 1][j]->x, m[i + 1][j]->y},
 					calc_color(fdf->matrix[i][j], fdf->matrix[i + 1][j]));
+			}
+			if (j + 1 < fdf->row_len[i])
+			{
+				draw_line(&fdf->img, (int [4]){m[i][j]->x, m[i][j]->y,
+					m[i][j + 1]->x, m[i][j + 1]->y},
+					calc_color(fdf->matrix[i][j], fdf->matrix[i][j + 1]));
 			}
 		}
 	}
