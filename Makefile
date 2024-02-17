@@ -6,7 +6,7 @@
 #    By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 17:41:42 by astavrop          #+#    #+#              #
-#    Updated: 2024/02/16 19:16:42 by astavrop         ###   ########.fr        #
+#    Updated: 2024/02/17 13:42:27 by astavrop         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,13 @@ $(NAME): $(OBJS) $(LFT_BIN) $(FT_PINTF_BIN)
 
 
 test: $(NAME)
-	./$(NAME) test.fdf
+	@[ -f ~/map-gen.py ] && \
+		python3 ~/map-gen.py -42 42 10 10 > ./test_map.fdf \
+		|| echo "\033[31;49;3mCan't find script to generate a test map.\033[0m"
+	@echo "\033[32;49;3mThis map will be used for test:\033[0m"
+	@cat ./test_map.fdf
+	@-./$(NAME) test_map.fdf
+	@rm ./test_map.fdf
 
 
 norm: $(SRCS)
