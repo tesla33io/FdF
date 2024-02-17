@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 20:39:16 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/17 13:40:21 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/17 14:15:24 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ void	start_mlx(t_fdf *fdf, char *wname)
 			&fdf->img.line_length, &fdf->img.endian);
 	fdf->img.width = WIDTH;
 	fdf->img.height = HEIGHT;
-	fdf->x_start = 350;
-	fdf->y_start = 200;
-	fdf->step = 10;
 }
 
 void	hook_init(t_fdf *fdf)

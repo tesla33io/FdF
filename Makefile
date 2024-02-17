@@ -6,7 +6,7 @@
 #    By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 17:41:42 by astavrop          #+#    #+#              #
-#    Updated: 2024/02/17 13:42:27 by astavrop         ###   ########.fr        #
+#    Updated: 2024/02/17 14:34:24 by astavrop         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS				+= 6_draw.c
 SRCS				+= 7_line.c
 SRCS				+= 8_hooks.c
 
+SRCS				+= 97_more_utils.c
 SRCS				+= 98_clear.c
 SRCS				+= 99_utils.c
 SRCS				+= gnl/get_next_line.c
@@ -64,13 +65,16 @@ $(NAME): $(OBJS) $(LFT_BIN) $(FT_PINTF_BIN)
 
 
 test: $(NAME)
-	@[ -f ~/map-gen.py ] && \
-		python3 ~/map-gen.py -42 42 10 10 > ./test_map.fdf \
-		|| echo "\033[31;49;3mCan't find script to generate a test map.\033[0m"
-	@echo "\033[32;49;3mThis map will be used for test:\033[0m"
-	@cat ./test_map.fdf
-	@-./$(NAME) test_map.fdf
-	@rm ./test_map.fdf
+	@-if [ -f ~/map-gen.py ]; then \
+		python3 ~/map-gen.py -10 10 7 7 > ./test_map.fdf; \
+		echo "\033[32;49;3mThis map will be used for test:\033[33m"; \
+		cat ./test_map.fdf; \
+		echo -n "\033[0m"; \
+		valgrind ./$(NAME) test_map.fdf; \
+		rm ./test_map.fdf; \
+	else \
+		echo "\033[31;49;3mNo python script at $(HOME)\033[0m"; \
+	fi
 
 
 norm: $(SRCS)

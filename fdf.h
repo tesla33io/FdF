@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:19:04 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/16 21:09:16 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/17 14:32:36 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct s_fdf
 	int		x_start;
 	int		y_start;
 	double	step;
+	int		width;
+	int		height;
 	char	**map;
 	t_dot	***matrix;
 	t_dot	***trm;
@@ -125,6 +127,7 @@ void		connect_points(t_fdf *fdf);
 int			count_lines(char *fn);
 int			count_cols(char **arr);
 int			calc_color(t_dot *s, t_dot *e);
+int			get_col_len(char *str_col);
 
 void		clear_all(t_fdf *fdf);
 
