@@ -10,13 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include <stdlib.h>
 #include <math.h>
 #include "fdf.h"
-#include "libft.h"
 #include "ft_printf.h"
-#include "colors.h"
 
 int	rotate_coords(t_dot *d, t_fdf *fdf, double fn(double))
 {

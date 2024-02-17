@@ -10,13 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
 #include <stdlib.h>
-#include <math.h>
 #include "fdf.h"
-#include "libft.h"
 #include "ft_printf.h"
-#include "colors.h"
 
 void	ft_put_pixel(t_img *data, int x, int y, int color)
 {

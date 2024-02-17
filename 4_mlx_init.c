@@ -10,12 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <stdlib.h>
 #include "fdf.h"
-#include "libft.h"
-#include "ft_printf.h"
-#include "colors.h"
 
 void	start_mlx(t_fdf *fdf, char *wname)
 {

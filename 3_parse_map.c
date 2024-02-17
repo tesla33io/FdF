@@ -15,9 +15,7 @@
 #include <unistd.h>
 #include "fdf.h"
 #include "ft_printf.h"
-#include "libft.h"
 #include "get_next_line.h"
-#include "colors.h"
 
 void	parse_file(t_fdf *fdf, char **argv)
 {
