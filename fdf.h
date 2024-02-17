@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 16:19:04 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/17 15:25:50 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:10:37 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ int			get_col_len(char *str_col);
 int			max(int a, int b);
 
 void		clear_all(t_fdf *fdf);
+void		clear_map(char **map);
 
 # define KEY_UP			65362
 # define KEY_DOWN		65364

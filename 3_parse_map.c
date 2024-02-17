@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:37:41 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/17 16:45:04 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/17 17:18:10 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,16 @@ t_dot	**parse_row(t_fdf *fdf, int index)
 	i = 0;
 	while (i < fdf->row_len[index])
 	{
+		if (ft_strncmp(s[i], " ", 1) == 0)
+			continue ;
 		dots[i] = malloc(sizeof(t_dot));
 		dots[i]->z = ft_atoi(s[i]);
 		dots[i]->x = fdf->x_start + index * fdf->step;
 		dots[i]->y = fdf->y_start - i * fdf->step;
 		i++;
 	}
-	i = -1;
-	while (s[++i])
-		free(s[i]);
-	free(s);
+	dots[i] = NULL;
+	clear_map(s);
 	return (dots);
 }
 

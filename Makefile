@@ -6,7 +6,7 @@
 #    By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 17:41:42 by astavrop          #+#    #+#              #
-#    Updated: 2024/02/17 15:27:24 by astavrop         ###   ########.fr        #
+#    Updated: 2024/02/17 17:20:35 by astavrop         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,10 +26,9 @@ SRCS				+= 4_mlx_init.c
 SRCS				+= 6_draw.c
 SRCS				+= 7_line.c
 SRCS				+= 8_hooks.c
-
-SRCS				+= 97_more_utils.c
-SRCS				+= 98_clear.c
-SRCS				+= 99_utils.c
+SRCS				+= 9_clear.c
+SRCS				+= 91_utils.c
+SRCS				+= 92_more_utils.c
 SRCS				+= gnl/get_next_line.c
 OBJ_DIR				= obj
 OBJS				= $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
@@ -78,7 +77,9 @@ test: $(NAME)
 
 
 norm: $(SRCS)
-	-norminette $(SRCS)
+	-norminette $(SRCS) colors.h fdf.h $(LFT_PATH)libft.h \
+		$(FT_PINTF_PATH)includes/ft_printf.h gnl/get_next_line.h \
+		| grep --color=always 'ERROR!\|OK!'
 
 
 $(FT_PINTF_BIN):
