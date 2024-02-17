@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 14:04:36 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/14 22:12:28 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/17 15:27:20 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	input_check(int argc, char **argv)
 		print_usage();
 }
 
-void	retrieve_line(int fd, char **line)
+static void	retrieve_line(int fd, char **line)
 {
 	free(*line);
 	*line = get_next_line(fd);

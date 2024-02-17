@@ -6,7 +6,7 @@
 /*   By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 14:29:38 by astavrop          #+#    #+#             */
-/*   Updated: 2024/02/17 14:33:26 by astavrop         ###   ########.fr       */
+/*   Updated: 2024/02/17 15:27:33 by astavrop         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,12 @@ int	get_col_len(char *str_col)
 		free(s[i]);
 	free(s);
 	return (len);
+}
+
+int	max(int a, int b)
+{
+	if (a > b)
+		return (a);
+	else
+		return (b);
 }
