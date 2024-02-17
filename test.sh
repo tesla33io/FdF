@@ -98,6 +98,23 @@ echo -e "\t${purple}-- too many args${reset}"
 echo ./fdf 1 2 3 4 5 6 7 8 9 0 && ./fdf 1 2 3 4 5 6 7 8 9 0
 echo -e "\t${purple}-- not .fdf file${reset}"
 echo ./fdf Makefile && ./fdf Makefile
+echo -e "\t${purple}-- file with wrong permission${reset}"
+cat <<EOF >map.fdf
+0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+0  0 50 50  0  0 50 50  0  0  0 50 50 50 50 50  0  0  0
+0  0 50 50  0  0 50 50  0  0  0  0  0  0  0 50 50  0  0
+0  0 50 50  0  0 50 50  0  0  0  0  0  0  0 50 50  0  0
+0  0 50 50 50 50 50 50  0  0  0  0 50 50 50 50  0  0  0
+0  0  0 50 50 50 50 50  0  0  0 50 50  0  0  0  0  0  0
+0  0  0  0  0  0 50 50  0  0  0 50 50  0  0  0  0  0  0
+0  0  0  0  0  0 50 50  0  0  0 50 50 50 50 50 50  0  0
+0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
+EOF
+chmod 000 map.fdf
+echo "./fdf map.fdf" && ./fdf map.fdf
+rm -f map.fdf
 
 pause
 
