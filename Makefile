@@ -6,32 +6,37 @@
 #    By: astavrop <astavrop@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/09 17:41:42 by astavrop          #+#    #+#              #
-#    Updated: 2024/02/17 17:20:35 by astavrop         ###   ########.fr        #
+#    Updated: 2024/02/22 20:32:59 by astavrop         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC					= cc
-CFLAGS				= -Wall -Werror -Wextra -pedantic -g3 -O0
+CFLAGS				= -Wall -Werror -Wextra -pedantic
 LIBS				+= -L$(FT_PINTF_PATH) -L$(LFT_PATH) -lftprintf -lft
 LIBS				+= -L$(MLX_PATH) -lmlx -L/usr/lib/X11 -lXext -lX11
 LIBS				+= -lm
-INCLUDES			+= -I/usr/include -Imlx-linux -Ift_printf/includes -I./libft -I.
+INCLUDES			+= -I/usr/include -Imlx-linux -Ift_printf/includes -I./libft -I./include
 INCLUDES			+= -Ignl
 NAME				= fdf
 
-SRCS				+= 1_main.c
-SRCS				+= 2_checks.c
-SRCS				+= 3_parse_map.c
-SRCS				+= 4_mlx_init.c
-SRCS				+= 6_draw.c
-SRCS				+= 7_line.c
-SRCS				+= 8_hooks.c
-SRCS				+= 9_clear.c
-SRCS				+= 91_utils.c
-SRCS				+= 92_more_utils.c
+SRC_DIR				:= ./src/
+SRCS				+= $(SRC_DIR)main.c
+SRCS				+= $(SRC_DIR)checks.c
+SRCS				+= $(SRC_DIR)parse_map.c
+SRCS				+= $(SRC_DIR)mlx_init.c
+SRCS				+= $(SRC_DIR)draw.c
+SRCS				+= $(SRC_DIR)line.c
+SRCS				+= $(SRC_DIR)hooks.c
+SRCS				+= $(SRC_DIR)clear.c
+SRCS				+= $(SRC_DIR)utils.c
+SRCS				+= $(SRC_DIR)more_utils.c
 SRCS				+= gnl/get_next_line.c
-OBJ_DIR				= obj
-OBJS				= $(patsubst %.c, $(OBJ_DIR)/%.o, $(SRCS))
+
+OBJ_DIR				:= ./obj/
+OBJS				:= $(patsubst %.c, $(OBJ_DIR)%.o, $(SRCS))
+
+
+DEPS				:= $(OBJS:.o=.d)
 
 
 FT_PINTF_PATH		= ./ft_printf/
@@ -48,9 +53,9 @@ MLX_PATH			= ./minilibx-linux/
 all: $(NAME)
 
 
-$(OBJ_DIR)/%.o: %.c fdf.h colors.h
+$(OBJ_DIR)%.o: %.c
 	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	@$(CC) $(CFLAGS) -MMD -MF $(patsubst %.o,%.d,$@) $(INCLUDES) -c $< -o $@
 
 
 $(NAME): $(OBJS) $(LFT_BIN) $(FT_PINTF_BIN)
