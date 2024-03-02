@@ -4,9 +4,6 @@
 
 This project is about creating a simple wireframe model of a landscape.
 
-> [!WARNING]
-> TODO: no error with `*.fdf..` as an input
-
 <details>
   <summary>Bresenham's Line Algorithm 🧙‍♂️</summary>
 
